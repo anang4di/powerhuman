@@ -16,16 +16,16 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
+        $this->call([
+            CompanySeeder::class,
+            TeamSeeder::class,
+        ]);
+
         User::factory()->create([
             'name' => 'Ada Lovelace',
             'email' => 'ada@gmail.com',
             'password' => Hash::make('password'),
             'company_id' => 1,
-        ]);
-
-        $this->call([
-            CompanySeeder::class,
-            TeamSeeder::class,
         ]);
     }
 }

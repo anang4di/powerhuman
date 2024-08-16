@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\CompanyController;
+use App\Http\Controllers\Api\EmployeeController;
 use App\Http\Controllers\Api\ResponsibilityController;
 use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\Api\TeamController;
@@ -43,10 +44,19 @@ Route::prefix('/v1')->group(function () {
             Route::delete('{id}', [RoleController::class, 'destroy'])->name('delete');
         });
 
+        // Responsilibity
         Route::prefix('responsibilities')->name('responsibilities.')->group(function () {
             Route::get('', [ResponsibilityController::class, 'fetch'])->name('fetch');
             Route::post('', [ResponsibilityController::class, 'create'])->name('create');
             Route::delete('{id}', [ResponsibilityController::class, 'destroy'])->name('delete');
+        });
+
+        // Employee
+        Route::prefix('employees')->name('employees.')->group(function () {
+            Route::get('', [EmployeeController::class, 'fetch'])->name('fetch');
+            Route::post('', [EmployeeController::class, 'create'])->name('create');
+            Route::post('update/{id}', [EmployeeController::class, 'update'])->name('update');
+            Route::delete('{id}', [EmployeeController::class, 'destroy'])->name('delete');
         });
     });
 });

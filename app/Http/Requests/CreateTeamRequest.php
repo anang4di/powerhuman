@@ -24,7 +24,7 @@ class CreateTeamRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'icon' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'icon' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'company_id' => 'required|integer|exists:companies,id',
         ];
     }

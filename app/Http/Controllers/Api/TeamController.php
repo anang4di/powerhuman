@@ -7,8 +7,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateTeamRequest;
 use App\Http\Requests\UpdateTeamRequest;
 use App\Models\Team;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TeamController extends Controller
 {
@@ -18,7 +20,8 @@ class TeamController extends Controller
         $name = $request->input('name');
         $limit = $request->input('limit', 10);
 
-        $teamQuery = Team::query();
+        $user = User::find(Auth::id());
+        $teamQuery = Team::where('company_id', $user->company->id);
 
         // Get single data
         if ($id) {
@@ -32,7 +35,7 @@ class TeamController extends Controller
         }
 
         // Get multiple data
-        $teams = $teamQuery->where('company_id', $request->company_id);
+        $teams = $teamQuery;
 
         if ($name) {
             $teams->where('name', 'like', '%' . $name . '%');
@@ -72,7 +75,6 @@ class TeamController extends Controller
 
     public function update(UpdateTeamRequest $request, $id)
     {
-
         try {
             // Get team
             $team = Team::find($id);

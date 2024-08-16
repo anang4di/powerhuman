@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\CompanyController;
+use App\Http\Controllers\Api\ResponsibilityController;
 use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\Api\TeamController;
 use App\Http\Controllers\Api\UserController;
@@ -40,6 +41,12 @@ Route::prefix('/v1')->group(function () {
             Route::post('', [RoleController::class, 'create'])->name('create');
             Route::post('update/{id}', [RoleController::class, 'update'])->name('update');
             Route::delete('{id}', [RoleController::class, 'destroy'])->name('delete');
+        });
+
+        Route::prefix('responsibilities')->name('responsibilities.')->group(function () {
+            Route::get('', [ResponsibilityController::class, 'fetch'])->name('fetch');
+            Route::post('', [ResponsibilityController::class, 'create'])->name('create');
+            Route::delete('{id}', [ResponsibilityController::class, 'destroy'])->name('delete');
         });
     });
 });

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\CompanyController;
+use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\Api\TeamController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +32,14 @@ Route::prefix('/v1')->group(function () {
             Route::post('', [TeamController::class, 'create'])->name('create');
             Route::post('update/{id}', [TeamController::class, 'update'])->name('update');
             Route::delete('{id}', [TeamController::class, 'destroy'])->name('delete');
+        });
+
+        // Role
+        Route::prefix('roles')->name('roles.')->group(function () {
+            Route::get('', [RoleController::class, 'fetch'])->name('fetch');
+            Route::post('', [RoleController::class, 'create'])->name('create');
+            Route::post('update/{id}', [RoleController::class, 'update'])->name('update');
+            Route::delete('{id}', [RoleController::class, 'destroy'])->name('delete');
         });
     });
 });

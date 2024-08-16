@@ -13,7 +13,7 @@ class TeamSeeder extends Seeder
      */
     public function run(): void
     {
-        Team::insert([
+        $teams = [
             [
                 'name' => 'Finance',
                 'icon' => '',
@@ -39,6 +39,10 @@ class TeamSeeder extends Seeder
                 'icon' => '',
                 'company_id' => 1,
             ],
-        ]);
+        ];
+
+        foreach($teams as $team) {
+            Team::create($team);
+        }
     }
 }
